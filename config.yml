@@ -1,0 +1,19 @@
+theme: PaperMod
+baseURL: https://this.geundung.dev/
+languageCode: en-us
+title: BoxDB
+params:
+  profileMode:
+    enabled: true
+    title: bxd
+    subtitle: Object relational mapping for IndexedDB
+    imageUrl: logo.png
+    imageTitle: logo
+    imageWidth: 120
+    imageHeight: 120
+    buttons:
+      - name: Get Started
+        url: /getting-started
+  socialIcons:
+    - name: github
+      url: https://github.com/leegeunhyeok/bxd
