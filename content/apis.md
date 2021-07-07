@@ -76,11 +76,9 @@ Properties
 
 ### BoxDB.Range
 
-> The `BoxDB.Range` is a set of methods to create [IDBKeyRange](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange).
+> The `BoxDB.Range` is a set of [IDBKeyRange](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange).
 
 ```javascript
-BoxDB.Range;
-
 // Properties
 BoxDB.Range.equal(x);
 BoxDB.Range.upper(x[, open]);
@@ -134,7 +132,7 @@ db.transaction(Task_1, Task_2, abortTask, Task_3);
 
 ### BoxDB.box()
 
-> The `box()` method of the BoxDB interface returns new box based on schema.
+> The `box()` method of the BoxDB interface returns new [Box](#box).
 
 ```javascript
 db.box(name, schema[, options]);
@@ -155,7 +153,7 @@ Return value
 
 ### BoxDB.open()
 
-> The `open()` method of the BoxDB interface open IndexedDB and create/update/delete object store based on registered boxes.
+> The `open()` method of the BoxDB interface open IndexedDB and create/update/delete object store based on created boxes.
 
 ```javascript
 await db.open();
@@ -167,9 +165,9 @@ Return value
 
 ### BoxDB.transaction()
 
-> The `BoxDB.transaction()` method takes an list of [TransactionTask](#transactiontask) as an input, and perform tasks in transaction sequentially.
+> The `BoxDB.transaction()` method takes an list of [TransactionTask](#transactiontask) as an input, and perform tasks sequentially in one transaction.
 
-> Most important, if an error occurs in transaction, it is rolled back to the previous state.
+> Most important, if an error occurs during transaction, rolled back to the previous state.
 
 ```javascript
 // ACID guaranteed
@@ -253,7 +251,7 @@ Options
 
 ## BoxOptions
 
-> Options for create box.
+> Box creation options
 
 ```typescript
 interface BoxOptions {
@@ -325,12 +323,12 @@ Properties
 
 - value: [BoxDB.Range](#boxdbrange) or [IDBValidKey](https://microsoft.github.io/PowerBI-JavaScript/modules/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.html#idbvalidkey) value
 - index: `string` (`optional`)
-  - Must have set name of indexed box field
-  - If index is empty, follows [in-line key](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Basic_Concepts_Behind_IndexedDB#gloss_inline_key)
+  - Indexed field name in schema (`index: true` option)
+  - If you don't serve index name, follows [in-line key](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Basic_Concepts_Behind_IndexedDB#gloss_inline_key) as default.
 
 ## BoxFilterFunction
 
-> The `BoxFilterFunction` is a function to be run for each records in object store. This function will recive [BoxData](#boxdata) and should returns bool value
+> The `BoxFilterFunction` is a function to evaluate each record. This function receives [BoxData](#boxdata) and returns a boolean value.
 
 ```javascript
 const predicate_1 = (data) => data.age === 10;
@@ -342,7 +340,7 @@ Box.find(null, predicate_1, predicate_2, predicate_3);
 
 ## Box
 
-> The `Box` is abstract model that control object store.
+> A `Box` is an abstraction that represents a [object store](https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore). and also can generate data in a defined form (schema).
 
 ```javascript
 const User = db.box('user', {
@@ -429,7 +427,7 @@ Return value
 
 ### Box.getVersion()
 
-> The `getVersion()` methods returns target version of database
+> The `getVersion()` methods returns version of database
 
 ```javascript
 Box.getVersion();
@@ -441,7 +439,7 @@ Return value
 
 ### Box.add()
 
-> The `add()` method of the Box interface validate data and store to object store
+> The `add()` method of the Box interface stores the data in the target object store.
 
 ```javascript
 Box.add(value[, key]);
@@ -451,9 +449,9 @@ Box.add({ id: 1, name: 'Tom', age: 15 });
 Parameters
 
 - value: [BoxData](#boxdata)
-  - The value to be stored.
+  - The data to be stored.
 - key: [IDBValidKey](https://microsoft.github.io/PowerBI-JavaScript/modules/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.html#idbvalidkey) (`optional`)
-  - The key to use to identify the record. If unspecified, it results to null.
+  - The key to use to identify the record. (default: `null`)
   - Using this parameter when box defined with `autoIncrement` option.
 
 Return value
@@ -489,7 +487,7 @@ Box.put(value[, key]);
 Parameters
 
 - value: [BoxData](#boxdata)
-  - The item you wish to update (or insert).
+  - The data you wish to update.
 - key: [IDBValidKey](https://microsoft.github.io/PowerBI-JavaScript/modules/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.html#idbvalidkey) (`optional`)
   - The key that identifies the record to be updated.
   - Using this parameter when box defined with `autoIncrement` option.
@@ -517,7 +515,7 @@ Return value
 
 ## Box.find()
 
-> The `find()` method of the Box interface find records via [IDBRange](https://developer.mozilla.org/en-US/docs/Web/API/IDBRange), select with all records that pass the test implemented by the provided function.
+> The `find()` method of the Box interface selects all records that are retrieved by [BoxRange](#boxrange) and passed the provided [BoxFilterFunction](#boxfilterfunction).
 
 Parameters
 
@@ -554,7 +552,7 @@ Return value
 
 ### Box.$add()
 
-> The `$add()` of the Box interface returns [TransactionTask](#transactiontask) for adding a record in [transaction()](#boxdbtransaction)
+> The `$add()` of the Box interface returns [TransactionTask](#transactiontask) to add record.
 
 > `$` Prefixed methods returns [TransactionTask](#transactiontask)
 
@@ -566,9 +564,9 @@ Box.$add({ id: 2, name: 'Carl', age: 12 });
 Parameters
 
 - value: [BoxData](#boxdata)
-  - The value to be stored.
+  - The data to be stored.
 - key: [IDBValidKey](https://microsoft.github.io/PowerBI-JavaScript/modules/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.html#idbvalidkey) (`optional`)
-  - The key to use to identify the record. If unspecified, it results to null.
+  - The key to use to identify the record. (default: `null`)
   - Using this parameter when box defined with `autoIncrement` option.
 
 Return value
@@ -577,7 +575,7 @@ Return value
 
 ### Box.$put()
 
-> The `$put()` of the Box interface returns a [TransactionTask](#transactiontask) for updating or adding a record in [transaction()](#boxdbtransaction)
+> The `$put()` of the Box interface returns a [TransactionTask](#transactiontask) to update or insert record.
 
 ```javascript
 Box.$put(value[, key]);
@@ -586,7 +584,7 @@ Box.$put(value[, key]);
 Parameters
 
 - value: [BoxData](#boxdata)
-  - The item you wish to update (or insert).
+  - The data you wish to update.
 - key: [IDBValidKey](https://microsoft.github.io/PowerBI-JavaScript/modules/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.html#idbvalidkey) (`optional`)
   - The key that identifies the record to be updated.
   - Using this parameter when box defined with `autoIncrement` option.
@@ -597,7 +595,7 @@ Return value
 
 ### Box.$delete()
 
-> The `$delete()` of the Box interface returns a [TransactionTask](#transactiontask) for deleting specified record in [transaction()](#boxdbtransaction)
+> The `$delete()` of the Box interface returns a [TransactionTask](#transactiontask) to delete record.
 
 ```javascript
 Box.$delete(key);
@@ -615,9 +613,9 @@ Return value
 
 ## Box.$find()
 
-> The `$find()` method of the Box interface find records via [IDBRange](https://developer.mozilla.org/en-US/docs/Web/API/IDBRange), select with all records that pass the test implemented by the provided function like.
+> The `find()` method of the Box interface selects all records that are retrieved by [BoxRange](#boxrange) and passed the provided [BoxFilterFunction](#boxfilterfunction).
 
-> Different from `find()`, `$find()` returns `TransactionCursorHandler`.
+> Different from `find()`, `$find()` returns [TransactionCursorHandler](#transactioncursorhandler).
 
 ```javascript
 Box.$find(range, ...predicate);
@@ -634,7 +632,7 @@ Return value
 
 ## BoxCursorHandler
 
-> The `BoxCursorHandler` interface using [IDBCursor](https://developer.mozilla.org/en-US/docs/Web/API/IDBCursor) for data control.
+> The `BoxCursorHandler` interface uses [IDBCursor](https://developer.mozilla.org/en-US/docs/Web/API/IDBCursor) to control data.
 
 ```typescript
 Box.find(...).get(order, limit);
@@ -650,7 +648,7 @@ Methods
 
 ### BoxCursorHandler.get()
 
-> The `get()` method of the BoxCursorHandler interface uses [IDBCursor](https://developer.mozilla.org/en-US/docs/Web/API/IDBCursor) and returns a filtered list of record data from object store.
+> The `get()` method of the BoxCursorHandler interface returns a filtered list of record data from object store.
 
 ```javascript
 Box.find(...).get(order, limit);
@@ -664,7 +662,6 @@ Parameters
   - Ordering based on specified index (default: [in-line key](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Basic_Concepts_Behind_IndexedDB#gloss_inline_key))
 - limit: `number` (`optional`)
   - Default: _unlimited_
-  - If you need only a specified number of records from a object store, use a limit parameter.
 
 Return value
 
@@ -672,7 +669,7 @@ Return value
 
 ### BoxCursorHandler.update()
 
-> The `update()` method of the BoxCursorHandler interface uses [IDBCursor](https://developer.mozilla.org/en-US/docs/Web/API/IDBCursor) and update a filtered records data from object store.
+> The `update()` method of the BoxCursorHandler interface updates filtered records data from object store.
 
 ```javascript
 Box.find(...).update(updateValue);
@@ -688,7 +685,7 @@ Return value
 
 ### BoxCursorHandler.delete()
 
-> The `delete()` method of the BoxCursorHandler interface uses [IDBCursor](https://developer.mozilla.org/en-US/docs/Web/API/IDBCursor) and delete a filtered records data from object store.
+> The `delete()` method of the BoxCursorHandler interface deletes filtered records data from object store.
 
 ```javascript
 Box.find(...).delete();

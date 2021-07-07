@@ -9,11 +9,11 @@ BoxDB is a promise-based browser ORM for [IndexedDB](https://developer.mozilla.o
 # Concept
 
 [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) is async, fast, powerful. but not support [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) and
-must use callback pattern to using IndexedDB. This feels like a legacy code.
+must use callback pattern to using IndexedDB. It feels like a legacy code.
 
-For this reason, I started user friendly IndexedDB library, BoxDB project.
+For this reason, BoxDB project has started.
 
-But, why box?
+But, why name is BoxDB?
 
 - Boxes are lightweight.
 - Boxes has shape.
@@ -31,12 +31,12 @@ Box is the same concept like `Model` used by other ORMs.
 - Promise based ORM
 - User friendly and easy to use
 - Lightweight(< 10kb) IndexedDB wrapper
-- Zero dependencies
+- Zero dependency
 - Database and object store version management
 - Data validation and transaction control via model (box)
 - ACID(Atomicity, Consistency, Isolation, Durability) guaranteed with transaction
 - Supports TypeScript
-- Works on [Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API)
+- Works on [Web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API)
 
 # Browser Support
 
