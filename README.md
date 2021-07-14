@@ -15,6 +15,5 @@ hugo new content/filename.md
 hugo server -D
 
 # Build & deploy
-hugo -d public/docs
-./deploy.sh
+hugo -d dist
 ```
