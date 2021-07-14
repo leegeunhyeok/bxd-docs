@@ -2,20 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://this.geundung.dev/bxd/apis/</loc>
+    <loc>/apis/</loc>
   </url><url>
-    <loc>https://this.geundung.dev/bxd/archives/</loc>
+    <loc>/archives/</loc>
   </url><url>
-    <loc>https://this.geundung.dev/bxd/</loc>
+    <loc>/</loc>
   </url><url>
-    <loc>https://this.geundung.dev/bxd/categories/</loc>
+    <loc>/categories/</loc>
   </url><url>
-    <loc>https://this.geundung.dev/bxd/example/</loc>
+    <loc>/example/</loc>
   </url><url>
-    <loc>https://this.geundung.dev/bxd/getting-started/</loc>
+    <loc>/getting-started/</loc>
   </url><url>
-    <loc>https://this.geundung.dev/bxd/ie/</loc>
+    <loc>/ie/</loc>
   </url><url>
-    <loc>https://this.geundung.dev/bxd/tags/</loc>
+    <loc>/tags/</loc>
   </url>
 </urlset>
