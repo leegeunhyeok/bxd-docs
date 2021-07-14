@@ -4,7 +4,7 @@ draft: false
 ShowToc: true
 ---
 
-![bxd](/bxd/bxd.gif)
+![bxd](/bxd.gif)
 
 BoxDB is a promise-based browser ORM for [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)
 

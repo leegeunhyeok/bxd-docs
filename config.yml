@@ -1,5 +1,4 @@
 theme: PaperMod
-baseURL: https://this.geundung.dev/bxd/
 languageCode: en-us
 title: BoxDB
 params:
@@ -13,9 +12,9 @@ params:
     imageHeight: 120
     buttons:
       - name: Get Started
-        url: /bxd/getting-started
+        url: /getting-started
       - name: API Reference
-        url: /bxd/apis
+        url: /apis
   socialIcons:
     - name: github
       url: https://github.com/leegeunhyeok/bxd
