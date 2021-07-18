@@ -14,6 +14,6 @@ hugo new content/filename.md
 # Start local server for preview (draft contents included)
 hugo server -D
 
-# Build & deploy
+# Build
 hugo -d dist
 ```
