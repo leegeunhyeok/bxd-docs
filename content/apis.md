@@ -195,11 +195,11 @@ Return value
 
 ```typescript
 interface BoxSchema {
-  [field: string]: ConfiguredType | BoxDataTypes;
+  [field: string]: ConfiguredType | DataType;
 }
 
 // BoxDB.Types
-export enum BoxDataTypes {
+export enum DataType {
   BOOLEAN = '1',
   NUMBER = '2',
   STRING = '3',
@@ -213,7 +213,7 @@ export enum BoxDataTypes {
 }
 
 type ConfiguredType = {
-  type: BoxDataTypes;
+  type: DataType;
   key?: boolean;
   index?: boolean;
   unique?: boolean;
@@ -249,12 +249,12 @@ Options
   - Add [unique constraint](https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore/createIndex#parameters) to this property's index
     - Must have use with `index` option
 
-## BoxOptions
+## BoxOption
 
 > Box creation options
 
 ```typescript
-interface BoxOptions {
+interface BoxOption {
   autoIncrement?: boolean;
   force?: boolean;
 }
@@ -299,6 +299,12 @@ type BoxData = {
 }
 ```
 
+### OptionalBoxData
+
+```typescript
+type OptionalBoxData<S extends Schema> = Partial<BoxData<S>>;
+```
+
 ## BoxRange
 
 > The `BoxRange` is an object for query with value or [IDBKeyRange](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange).
@@ -326,9 +332,9 @@ Properties
   - Indexed field name in schema (`index: true` option)
   - If you don't serve index name, follows [in-line key](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Basic_Concepts_Behind_IndexedDB#gloss_inline_key) as default.
 
-## BoxFilterFunction
+## FilterFunction
 
-> The `BoxFilterFunction` is a function to evaluate each record. This function receives [BoxData](#boxdata) and returns a boolean value.
+> The `FilterFunction` is a function to evaluate each record. This function receives [BoxData](#boxdata) and returns a boolean value.
 
 ```javascript
 const predicate_1 = (data) => data.age === 10;
@@ -515,12 +521,12 @@ Return value
 
 ## Box.find()
 
-> The `find()` method of the Box interface selects all records that are retrieved by [BoxRange](#boxrange) and passed the provided [BoxFilterFunction](#boxfilterfunction).
+> The `find()` method of the Box interface selects all records that are retrieved by [BoxRange](#boxrange) and passed the provided [FilterFunction](#filterfunction).
 
 Parameters
 
 - range: [BoxRange](#boxrange) (`optional`)
-- pridicate: ...[BoxFilterFunction](#boxfilterfunction) (`optional`)
+- pridicate: ...[FilterFunction](#filterfunction) (`optional`)
 
 Return value
 
@@ -613,7 +619,7 @@ Return value
 
 ## Box.$find()
 
-> The `find()` method of the Box interface selects all records that are retrieved by [BoxRange](#boxrange) and passed the provided [BoxFilterFunction](#boxfilterfunction).
+> The `find()` method of the Box interface selects all records that are retrieved by [BoxRange](#boxrange) and passed the provided [FilterFunction](#filterfunction).
 
 > Different from `find()`, `$find()` returns [TransactionCursorHandler](#transactioncursorhandler).
 
@@ -624,7 +630,7 @@ Box.$find(range, ...predicate);
 Parameters
 
 - range: [BoxRange](#boxrange) (`optional`)
-- pridicate: ...[BoxFilterFunction](#boxfilterfunction) (`optional`)
+- pridicate: ...[FilterFunction](#filterfunction) (`optional`)
 
 Return value
 
@@ -677,7 +683,7 @@ Box.find(...).update(updateValue);
 
 Parameters
 
-- updateValue: Partial<[BoxData](#boxdata)>
+- updateValue: [OptionalBoxData](#optionalboxdata)
 
 Return value
 
@@ -718,7 +724,7 @@ const task = Box.$find(...).update(updateValue);
 
 Parameters
 
-- updateValue: Partial<[BoxData](#boxdata)>
+- updateValue: [OptionalBoxData](#optionalboxdata)
 
 Return value
 
