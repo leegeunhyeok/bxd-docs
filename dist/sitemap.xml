@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url>
-    <loc>/apis/</loc>
-  </url><url>
-    <loc>/archives/</loc>
-  </url><url>
-    <loc>/</loc>
-  </url><url>
-    <loc>/categories/</loc>
-  </url><url>
-    <loc>/example/</loc>
-  </url><url>
-    <loc>/getting-started/</loc>
-  </url><url>
-    <loc>/ie/</loc>
-  </url><url>
-    <loc>/tags/</loc>
-  </url>
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <sitemap>
+    <loc>https://bxd.vercel.app/en/sitemap.xml</loc>
+    
+  </sitemap>
+  
+  <sitemap>
+    <loc>https://bxd.vercel.app/kr/sitemap.xml</loc>
+    
+  </sitemap>
+  
+</sitemapindex>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>BoxDB</title>
+    <link>https://bxd.vercel.app/kr/</link>
+    <description>Recent content on BoxDB</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://bxd.vercel.app/kr/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>API Reference</title>
+      <link>https://bxd.vercel.app/kr/apis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bxd.vercel.app/kr/apis/</guid>
+      <description>모든 기능들은 IndexedDB 의 매커니즘을 따릅니다. (w3c, MDN)
+ BoxDB  IndexedDB 와 Object store 를 관리하기 위한 클래스입니다.
+ 1  const db = new BoxDB(databaseName, version);   Parameters
+ databaseName: string  데이터베이스 이름   version: number  열고자 하는 데이터베이스 버전    Properties
+ BoxDB.Types static BoxDB.Range static BoxDB.Order static databaseName: string  데이터베이스 이름   version: number  데이터베이스 버전   ready: boolean  데이터베이스 준비 상태    Methods</description>
+    </item>
+    
+    <item>
+      <title>Example</title>
+      <link>https://bxd.vercel.app/kr/example/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bxd.vercel.app/kr/example/</guid>
+      <description> Any Note: 심플 노트 웹 애플리케이션 Hash Worker: 웹 워커를 통해 해시값을 찾고, 작업 기록을 IndexedDB 에 저장하는 샘플  </description>
+    </item>
+    
+    <item>
+      <title>Getting Started</title>
+      <link>https://bxd.vercel.app/kr/getting-started/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bxd.vercel.app/kr/getting-started/</guid>
+      <description>BoxDB는 IndexedDB를 위한 Promise 기반의 브라우저 ORM 입니다.
+개념 IndexedDB는 비동기 방식으로 동작하고, 빠르고 강력합니다. 하지만 Promise 를 지원하지 않으며, IndexedDB를 사용하기 위해선 콜백 패턴을 사용해야만 합니다. 이는 레거시 코드처럼 느껴집니다.
+이러한 이유로, BoxDB 프로젝트가 시작되었습니다.
+그런데 왜 이름이 BoxDB 인가요?
+ 박스는 가볍습니다. 박스에는 모양이 있습니다. 박스에는 무언가를 담을 수 있습니다. 박스는 쉽게 가져갈 수 있습니다.  이것이 BoxDB의 시작점이자, 핵심 개념입니다.
+Box는 BoxDB의 핵심입니다. Box는 IndexedDB 내의 객체 저장소를 나타대는 추상화입니다.</description>
+    </item>
+    
+    <item>
+      <title>Internet Explorer</title>
+      <link>https://bxd.vercel.app/kr/ie/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bxd.vercel.app/kr/ie/</guid>
+      <description>🎉 BoxDB는 IE11 를 지원합니다. (IE10는 드랍됨)
+테스트  환경: VirtualBox 윈도우 (Microsoft에서 제공함)  ✅ 모든 테스트 통과
+폴리필 1 2  &amp;lt;script src=&amp;#34;https://polyfill.io/v3/polyfill.min.js?features=Array.from%2CSymbol%2CSymbol.asyncIterator%2CSymbol.prototype.description%2CSymbol.iterator%2CArray.prototype.some%2CArray.prototype.includes%2CArray.prototype.every%2CArray.prototype.find%2CArray.isArray%2CArray.prototype.%40%40iterator%2CString.prototype.%40%40iterator%2CObject.assign%2CObject.entries%2CObject.getOwnPropertyDescriptor%2CObject.getPrototypeOf%2CObject.setPrototypeOf%2CPromise &amp;#34;&amp;gt;&amp;lt;/script&amp;gt;   🔽 IE11 를 위한 폴리필 목록 (core-js 3 기반)
+   Polyfill     es.symbol   es.symbol.description   es.symbol.async-iterator   es.symbol.iterator   es.array.concat   es.array.every   es.array.find   es.array.from   es.array.is-array   es.</description>
+    </item>
+    
+  </channel>
+</rss>
