@@ -1,20 +1,21 @@
 theme: PaperMod
 languageCode: en-us
 title: BoxDB
+baseURL: https://bxd.vercel.app
 params:
   profileMode:
     enabled: true
     title: bxd
-    subtitle: Object relational mapping for IndexedDB
-    imageUrl: logo.png
+    subtitle: Object Relational Mapping for IndexedDB
+    imageUrl: /logo.png
     imageTitle: logo
     imageWidth: 120
     imageHeight: 120
     buttons:
       - name: Get Started
-        url: /getting-started
+        url: getting-started
       - name: API Reference
-        url: /apis
+        url: apis
   socialIcons:
     - name: github
       url: https://github.com/leegeunhyeok/bxd
@@ -22,19 +23,24 @@ params:
     disableHLJS: true
   pygmentsCodeFences: true
   pygmentsUseClasses: true
+  defaultTheme: auto
+  editPost:
+    URL: https://github.com/leegeunhyeok/bxd-docs/tree/master/content
+    Text: Suggest Changes
+    appendFilePath: true
 menu:
   main:
     - identifier: start
       name: Get started
-      url: /getting-started/
+      url: getting-started/
       weight: 1
     - identifier: apis
       name: APIs
-      url: /apis/
+      url: apis/
       weight: 2
     - identifier: example
       name: Example
-      url: /example/
+      url: example/
       weight: 3
 markup:
   highlight:
@@ -42,3 +48,10 @@ markup:
     guessSyntax: true
     lineNos: true
     style: nord
+languages:
+  en:
+    weight: 1
+    url: /
+  kr:
+    weight: 2
+    url: /kr
