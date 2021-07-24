@@ -7,7 +7,8 @@
 <meta name="robots" content="index, follow">
 <title>Example | BoxDB</title>
 <meta name="keywords" content="" />
-<meta name="description" content=" Any Note: 심플 노트 웹 애플리케이션 Hash Worker: 웹 워커를 통해 해시값을 찾고, 작업 기록을 IndexedDB 에 저장하는 샘플  ">
+<meta name="description" content="기본 사용법 1 2 3 4 5 6 7  # 소스코드 구조 src --&#43;-- database | &#43;-- index.ts &#43;-- models | &#43;-- index.ts | &#43;-- user.ts &#43;-- index.ts (진입점)     BoxDB 인스턴스 생성하기
+1 2 3 4 5 6 7  // src/database/index.ts import BoxDB from &#39;bxd&#39;; export const DATABASE_NAME = &#39;database&#39;; export const VERSION = 1; export const database = new BoxDB(DATABASE_NAME, VERSION);     Box 정의하기">
 <meta name="author" content="">
 <link rel="canonical" href="https://bxd.vercel.app/kr/example/" />
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.ad9f0ead0ca83e7adfb727e59b23554a72652e38d445dd91346d5bcfd8736baf.css" integrity="sha256-rZ8OrQyoPnrftyflmyNVSnJlLjjURd2RNG1bz9hza68=" rel="preload stylesheet" as="style">
@@ -23,7 +24,8 @@
 <link rel="alternate" hreflang="en" href="https://bxd.vercel.app/example/" />
 <link rel="alternate" hreflang="kr" href="https://bxd.vercel.app/kr/example/" />
 <meta property="og:title" content="Example" />
-<meta property="og:description" content=" Any Note: 심플 노트 웹 애플리케이션 Hash Worker: 웹 워커를 통해 해시값을 찾고, 작업 기록을 IndexedDB 에 저장하는 샘플  " />
+<meta property="og:description" content="기본 사용법 1 2 3 4 5 6 7  # 소스코드 구조 src --&#43;-- database | &#43;-- index.ts &#43;-- models | &#43;-- index.ts | &#43;-- user.ts &#43;-- index.ts (진입점)     BoxDB 인스턴스 생성하기
+1 2 3 4 5 6 7  // src/database/index.ts import BoxDB from &#39;bxd&#39;; export const DATABASE_NAME = &#39;database&#39;; export const VERSION = 1; export const database = new BoxDB(DATABASE_NAME, VERSION);     Box 정의하기" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://bxd.vercel.app/kr/example/" /><meta property="article:section" content="" />
 
@@ -31,7 +33,8 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Example"/>
-<meta name="twitter:description" content=" Any Note: 심플 노트 웹 애플리케이션 Hash Worker: 웹 워커를 통해 해시값을 찾고, 작업 기록을 IndexedDB 에 저장하는 샘플  "/>
+<meta name="twitter:description" content="기본 사용법 1 2 3 4 5 6 7  # 소스코드 구조 src --&#43;-- database | &#43;-- index.ts &#43;-- models | &#43;-- index.ts | &#43;-- user.ts &#43;-- index.ts (진입점)     BoxDB 인스턴스 생성하기
+1 2 3 4 5 6 7  // src/database/index.ts import BoxDB from &#39;bxd&#39;; export const DATABASE_NAME = &#39;database&#39;; export const VERSION = 1; export const database = new BoxDB(DATABASE_NAME, VERSION);     Box 정의하기"/>
 
 
 <script type="application/ld+json">
@@ -54,12 +57,12 @@
   "@type": "BlogPosting",
   "headline": "Example",
   "name": "Example",
-  "description": " Any Note: 심플 노트 웹 애플리케이션 Hash Worker: 웹 워커를 통해 해시값을 찾고, 작업 기록을 IndexedDB 에 저장하는 샘플  ",
+  "description": "기본 사용법 1 2 3 4 5 6 7  # 소스코드 구조 src --+-- database | +-- index.ts +-- models | +-- index.ts | +-- user.ts +-- index.ts (진입점)     BoxDB 인스턴스 생성하기\n1 2 3 4 5 6 7  // src/database/index.ts import BoxDB from \u0026#39;bxd\u0026#39;; export const DATABASE_NAME = \u0026#39;database\u0026#39;; export const VERSION = 1; export const database = new BoxDB(DATABASE_NAME, VERSION);     Box 정의하기",
   "keywords": [
     
   ],
-  "articleBody": " Any Note: 심플 노트 웹 애플리케이션 Hash Worker: 웹 워커를 통해 해시값을 찾고, 작업 기록을 IndexedDB 에 저장하는 샘플  ",
-  "wordCount" : "19",
+  "articleBody": "기본 사용법 1 2 3 4 5 6 7  # 소스코드 구조 src --+-- database | +-- index.ts +-- models | +-- index.ts | +-- user.ts +-- index.ts (진입점)     BoxDB 인스턴스 생성하기\n1 2 3 4 5 6 7  // src/database/index.ts import BoxDB from 'bxd'; export const DATABASE_NAME = 'database'; export const VERSION = 1; export const database = new BoxDB(DATABASE_NAME, VERSION);     Box 정의하기\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20  // src/models/user.ts import BoxDB, { BoxData } from 'bxd'; import { database } from '../database'; const schema = { _id: { type: BoxDB.Types.NUMBER, key: true, }, name: BoxDB.Types.STRING, address: BoxDB.Types.STRING, hobby: BoxDB.Types.ARRAY, created_at: BoxDB.Types.DATE, updated_at: BoxDB.Types.DATE, } as const; const User = database.create('user', schema); export type UserType = BoxDatatypeof schema; export default User;     Box 의 엔트리 소스 작성하기\n1 2  // src/models/index.ts export { default as User } from './user';     Box 를 사용하기 전에 데이터베이스 열기\n1 2 3 4  // src/index.ts import { database } from './database'; await database.open();     준비 끝!\n1 2 3 4  import { User } from 'src/models'; await User.get(1); ...     React   기본 사용법에 이어서 진행\n  React Context와 Provider 생성하기\n1 2 3 4 5 6 7 8  // context.ts import { createContext, ReactElement } from 'react'; import { database } from './index'; export const BoxContext = createContext(database); export const BoxProvider = ({ children }: { children: ReactElement }) = { return BoxContext.Provider value={database}{children}BoxContext.Provider; };     Provider 준비\n1 2 3  BoxProvider ... BoxProvider     BoxDB 컨텍스트 사용하기\n1 2 3 4  import { useContext } from 'react'; import { BoxContext } from 'path/to/context.ts'; const db = useContext(BoxContext);     예제  Any Note: 심플 노트 웹 애플리케이션 Hash Worker: 웹 워커를 통해 해시값을 찾고, 작업 기록을 IndexedDB 에 저장하는 샘플  ",
+  "wordCount" : "294",
   "inLanguage": "kr",
   "datePublished": "0001-01-01T00:00:00Z",
   "dateModified": "0001-01-01T00:00:00Z",
@@ -196,7 +199,213 @@
 </ul>&nbsp;|&nbsp;<a href="https://github.com/leegeunhyeok/bxd-docs/tree/master/content/example.kr.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
 </div>
   </header> 
-  <div class="post-content"><ul>
+  <div class="post-content"><h1 id="기본-사용법">기본 사용법<a hidden class="anchor" aria-hidden="true" href="#기본-사용법">#</a></h1>
+<div class="highlight"><div style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#616e87;font-style:italic"># 소스코드 구조</span>
+src --+-- database
+      <span style="color:#eceff4">|</span>     +-- index.ts
+      +-- models
+      <span style="color:#eceff4">|</span>     +-- index.ts
+      <span style="color:#eceff4">|</span>     +-- user.ts
+      +-- index.ts <span style="color:#81a1c1">(</span>진입점<span style="color:#81a1c1">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>BoxDB 인스턴스 생성하기</p>
+<div class="highlight"><div style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#616e87;font-style:italic">// src/database/index.ts
+</span><span style="color:#616e87;font-style:italic"></span><span style="color:#81a1c1;font-weight:bold">import</span> BoxDB <span style="color:#81a1c1;font-weight:bold">from</span> <span style="color:#a3be8c">&#39;bxd&#39;</span><span style="color:#eceff4">;</span>
+
+<span style="color:#81a1c1;font-weight:bold">export</span> <span style="color:#81a1c1;font-weight:bold">const</span> DATABASE_NAME <span style="color:#81a1c1">=</span> <span style="color:#a3be8c">&#39;database&#39;</span><span style="color:#eceff4">;</span>
+<span style="color:#81a1c1;font-weight:bold">export</span> <span style="color:#81a1c1;font-weight:bold">const</span> VERSION <span style="color:#81a1c1">=</span> <span style="color:#b48ead">1</span><span style="color:#eceff4">;</span>
+
+<span style="color:#81a1c1;font-weight:bold">export</span> <span style="color:#81a1c1;font-weight:bold">const</span> database <span style="color:#81a1c1">=</span> <span style="color:#81a1c1;font-weight:bold">new</span> BoxDB<span style="color:#eceff4">(</span>DATABASE_NAME<span style="color:#eceff4">,</span> VERSION<span style="color:#eceff4">);</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Box 정의하기</p>
+<div class="highlight"><div style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">20
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#616e87;font-style:italic">// src/models/user.ts
+</span><span style="color:#616e87;font-style:italic"></span><span style="color:#81a1c1;font-weight:bold">import</span> BoxDB<span style="color:#eceff4">,</span> <span style="color:#eceff4">{</span> BoxData <span style="color:#eceff4">}</span> <span style="color:#81a1c1;font-weight:bold">from</span> <span style="color:#a3be8c">&#39;bxd&#39;</span><span style="color:#eceff4">;</span>
+<span style="color:#81a1c1;font-weight:bold">import</span> <span style="color:#eceff4">{</span> database <span style="color:#eceff4">}</span> <span style="color:#81a1c1;font-weight:bold">from</span> <span style="color:#a3be8c">&#39;../database&#39;</span><span style="color:#eceff4">;</span>
+
+<span style="color:#81a1c1;font-weight:bold">const</span> schema <span style="color:#81a1c1">=</span> <span style="color:#eceff4">{</span>
+  _id<span style="color:#81a1c1">:</span> <span style="color:#eceff4">{</span>
+    <span style="color:#81a1c1;font-weight:bold">type</span><span style="color:#81a1c1">:</span> BoxDB<span style="color:#eceff4">.</span>Types<span style="color:#eceff4">.</span>NUMBER<span style="color:#eceff4">,</span>
+    key: <span style="color:#81a1c1">true</span><span style="color:#eceff4">,</span>
+  <span style="color:#eceff4">},</span>
+  name: <span style="color:#81a1c1">BoxDB.Types.STRING</span><span style="color:#eceff4">,</span>
+  address: <span style="color:#81a1c1">BoxDB.Types.STRING</span><span style="color:#eceff4">,</span>
+  hobby: <span style="color:#81a1c1">BoxDB.Types.ARRAY</span><span style="color:#eceff4">,</span>
+  created_at: <span style="color:#81a1c1">BoxDB.Types.DATE</span><span style="color:#eceff4">,</span>
+  updated_at: <span style="color:#81a1c1">BoxDB.Types.DATE</span><span style="color:#eceff4">,</span>
+<span style="color:#eceff4">}</span> <span style="color:#81a1c1;font-weight:bold">as</span> <span style="color:#81a1c1;font-weight:bold">const</span><span style="color:#eceff4">;</span>
+
+<span style="color:#81a1c1;font-weight:bold">const</span> User <span style="color:#81a1c1">=</span> database<span style="color:#eceff4">.</span>create<span style="color:#eceff4">(</span><span style="color:#a3be8c">&#39;user&#39;</span><span style="color:#eceff4">,</span> schema<span style="color:#eceff4">);</span>
+
+<span style="color:#81a1c1;font-weight:bold">export</span> <span style="color:#81a1c1;font-weight:bold">type</span> UserType <span style="color:#81a1c1">=</span> BoxData<span style="color:#eceff4">&lt;</span><span style="color:#81a1c1">typeof</span> <span style="color:#8fbcbb">schema</span><span style="color:#eceff4">&gt;;</span>
+<span style="color:#81a1c1;font-weight:bold">export</span> <span style="color:#81a1c1;font-weight:bold">default</span> User<span style="color:#eceff4">;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Box 의 엔트리 소스 작성하기</p>
+<div class="highlight"><div style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#616e87;font-style:italic">// src/models/index.ts
+</span><span style="color:#616e87;font-style:italic"></span><span style="color:#81a1c1;font-weight:bold">export</span> <span style="color:#eceff4">{</span> <span style="color:#81a1c1;font-weight:bold">default</span> <span style="color:#81a1c1;font-weight:bold">as</span> User <span style="color:#eceff4">}</span> <span style="color:#81a1c1;font-weight:bold">from</span> <span style="color:#a3be8c">&#39;./user&#39;</span><span style="color:#eceff4">;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Box 를 사용하기 전에 데이터베이스 열기</p>
+<div class="highlight"><div style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#616e87;font-style:italic">// src/index.ts
+</span><span style="color:#616e87;font-style:italic"></span><span style="color:#81a1c1;font-weight:bold">import</span> <span style="color:#eceff4">{</span> database <span style="color:#eceff4">}</span> <span style="color:#81a1c1;font-weight:bold">from</span> <span style="color:#a3be8c">&#39;./database&#39;</span><span style="color:#eceff4">;</span>
+
+<span style="color:#81a1c1;font-weight:bold">await</span> database<span style="color:#eceff4">.</span>open<span style="color:#eceff4">();</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>준비 끝!</p>
+<div class="highlight"><div style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#81a1c1;font-weight:bold">import</span> <span style="color:#eceff4">{</span> User <span style="color:#eceff4">}</span> <span style="color:#81a1c1;font-weight:bold">from</span> <span style="color:#a3be8c">&#39;src/models&#39;</span><span style="color:#eceff4">;</span>
+
+<span style="color:#81a1c1;font-weight:bold">await</span> User<span style="color:#eceff4">.</span><span style="color:#81a1c1;font-weight:bold">get</span><span style="color:#eceff4">(</span><span style="color:#b48ead">1</span><span style="color:#eceff4">);</span>
+<span style="color:#eceff4">...</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="react">React<a hidden class="anchor" aria-hidden="true" href="#react">#</a></h2>
+<ul>
+<li>
+<p><strong>기본 사용법에 이어서 진행</strong></p>
+</li>
+<li>
+<p>React Context와 Provider 생성하기</p>
+<div class="highlight"><div style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#616e87;font-style:italic">// context.ts
+</span><span style="color:#616e87;font-style:italic"></span><span style="color:#81a1c1;font-weight:bold">import</span> <span style="color:#eceff4">{</span> createContext<span style="color:#eceff4">,</span> ReactElement <span style="color:#eceff4">}</span> <span style="color:#81a1c1;font-weight:bold">from</span> <span style="color:#a3be8c">&#39;react&#39;</span><span style="color:#eceff4">;</span>
+<span style="color:#81a1c1;font-weight:bold">import</span> <span style="color:#eceff4">{</span> database <span style="color:#eceff4">}</span> <span style="color:#81a1c1;font-weight:bold">from</span> <span style="color:#a3be8c">&#39;./index&#39;</span><span style="color:#eceff4">;</span>
+
+<span style="color:#81a1c1;font-weight:bold">export</span> <span style="color:#81a1c1;font-weight:bold">const</span> BoxContext <span style="color:#81a1c1">=</span> createContext<span style="color:#eceff4">(</span>database<span style="color:#eceff4">);</span>
+<span style="color:#81a1c1;font-weight:bold">export</span> <span style="color:#81a1c1;font-weight:bold">const</span> BoxProvider <span style="color:#81a1c1">=</span> <span style="color:#eceff4">({</span> children <span style="color:#eceff4">}</span><span style="color:#81a1c1">:</span> <span style="color:#eceff4">{</span> children: <span style="color:#81a1c1">ReactElement</span> <span style="color:#eceff4">})</span> <span style="color:#81a1c1">=&gt;</span> <span style="color:#eceff4">{</span>
+  <span style="color:#81a1c1;font-weight:bold">return</span> <span style="color:#eceff4">&lt;</span><span style="color:#81a1c1">BoxContext.Provider</span> <span style="color:#8fbcbb">value</span><span style="color:#81a1c1">=</span><span style="color:#eceff4">{</span>database<span style="color:#eceff4">}&gt;{</span>children<span style="color:#eceff4">}&lt;/</span><span style="color:#81a1c1">BoxContext.Provider</span><span style="color:#eceff4">&gt;;</span>
+<span style="color:#eceff4">};</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Provider 준비</p>
+<div class="highlight"><div style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#eceff4">&lt;</span><span style="color:#81a1c1">BoxProvider</span><span style="color:#eceff4">&gt;</span>
+  ...
+<span style="color:#eceff4">&lt;/</span><span style="color:#81a1c1">BoxProvider</span><span style="color:#eceff4">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>BoxDB 컨텍스트 사용하기</p>
+<div class="highlight"><div style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#d8dee9;background-color:#2e3440;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#81a1c1;font-weight:bold">import</span> <span style="color:#eceff4">{</span> useContext <span style="color:#eceff4">}</span> <span style="color:#81a1c1;font-weight:bold">from</span> <span style="color:#a3be8c">&#39;react&#39;</span><span style="color:#eceff4">;</span>
+<span style="color:#81a1c1;font-weight:bold">import</span> <span style="color:#eceff4">{</span> BoxContext <span style="color:#eceff4">}</span> <span style="color:#81a1c1;font-weight:bold">from</span> <span style="color:#a3be8c">&#39;path/to/context.ts&#39;</span><span style="color:#eceff4">;</span>
+
+<span style="color:#81a1c1;font-weight:bold">const</span> db <span style="color:#81a1c1">=</span> useContext<span style="color:#eceff4">(</span>BoxContext<span style="color:#eceff4">);</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="예제">예제<a hidden class="anchor" aria-hidden="true" href="#예제">#</a></h1>
+<ul>
 <li><a href="https://any-note.vercel.app">Any Note</a>: 심플 노트 웹 애플리케이션</li>
 <li><a href="https://hash-worker.vercel.app">Hash Worker</a>: 웹 워커를 통해 해시값을 찾고, 작업 기록을 IndexedDB 에 저장하는 샘플</li>
 </ul>

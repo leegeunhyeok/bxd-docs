@@ -25,7 +25,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://bxd.vercel.app/example/</guid>
-      <description> Any Note: Simple note web application Hash Worker: Find hash via Web Worker and store task history to IndexedDB  </description>
+      <description>Basic usage 1 2 3 4 5 6 7  # source structure src --+-- database | +-- index.ts +-- models | +-- index.ts | +-- user.ts +-- index.ts (entry point)     Create BoxDB instance
+1 2 3 4 5 6 7  // src/database/index.ts import BoxDB from &amp;#39;bxd&amp;#39;; export const DATABASE_NAME = &amp;#39;database&amp;#39;; export const VERSION = 1; export const database = new BoxDB(DATABASE_NAME, VERSION);     Define Box</description>
     </item>
     
     <item>
