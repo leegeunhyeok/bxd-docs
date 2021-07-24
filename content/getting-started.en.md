@@ -75,7 +75,7 @@ const db = new BoxDB('database-name', 1); // database name, version
 
 ```typescript
 // User Box (object store name: user)
-const User = db.box('user', {
+const User = db.create('user', {
   _id: {
     type: BoxDB.Types.STRING,
     key: true,
@@ -88,7 +88,7 @@ const User = db.box('user', {
 });
 
 // Item Box (object store name: item)
-const Item = db.box('item', {
+const Item = db.create('item', {
   uid: {
     type: BoxDB.Types.STRING,
     index: true,

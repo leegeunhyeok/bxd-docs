@@ -74,7 +74,7 @@ const db = new BoxDB('database-name', 1); // 데이터베이스 이름, 버전
 
 ```typescript
 // User Box (객체 저장소 이름: user)
-const User = db.box('user', {
+const User = db.create('user', {
   _id: {
     type: BoxDB.Types.STRING,
     key: true,
@@ -87,7 +87,7 @@ const User = db.box('user', {
 });
 
 // Item Box (객체 저장소 이름: item)
-const Item = db.box('item', {
+const Item = db.create('item', {
   uid: {
     type: BoxDB.Types.STRING,
     index: true,

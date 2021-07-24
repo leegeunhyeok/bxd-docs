@@ -37,7 +37,7 @@ Properties
 Methods
 
 - [BoxDB.interrupt](#boxdbinterrupt) `static`
-- [box()](#box)
+- [create()](#create)
 - [open()](#boxdbopen)
 - [transaction()](#boxdbtransaction)
 
@@ -130,12 +130,12 @@ const abortTask = BoxDB.interrupt(); // TransactionTask
 db.transaction(Task_1, Task_2, abortTask, Task_3);
 ```
 
-### BoxDB.box()
+### BoxDB.create()
 
-> BoxDB 인터페이스의 `box()` 메서드는 새로운 [Box](#box)를 반환합니다.
+> BoxDB 인터페이스의 `create()` 메서드는 새로운 [Box](#box)를 반환합니다.
 
 ```javascript
-db.box(name, schema[, options]);
+db.create(name, schema[, options]);
 ```
 
 Parameters
@@ -273,7 +273,7 @@ interface BoxOption {
 
 ```typescript
 // 샘플 box
-const User = db.box('user', {
+const User = db.create('user', {
   _id: {
     type: BoxDB.Types.NUMBER,
     key: true,
@@ -349,7 +349,7 @@ Box.find(null, predicate_1, predicate_2, predicate_3);
 > `Box` 는 [객체 저장소](https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore)를 나타내는 추상화입니다. 그리고 정의된 형태(스키마)의 값을 생성할 수 있습니다.
 
 ```javascript
-const User = db.box('user', {
+const User = db.create('user', {
   _id: {
     type: BoxDB.Types.NUMBER,
     key: true,

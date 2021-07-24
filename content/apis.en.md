@@ -37,7 +37,7 @@ Properties
 Methods
 
 - [BoxDB.interrupt](#boxdbinterrupt) `static`
-- [box()](#box)
+- [create()](#create)
 - [open()](#boxdbopen)
 - [transaction()](#boxdbtransaction)
 
@@ -130,12 +130,12 @@ const abortTask = BoxDB.interrupt(); // TransactionTask
 db.transaction(Task_1, Task_2, abortTask, Task_3);
 ```
 
-### BoxDB.box()
+### BoxDB.create()
 
-> The `box()` method of the BoxDB interface returns new [Box](#box).
+> The `create()` method of the BoxDB interface returns new [Box](#box).
 
 ```javascript
-db.box(name, schema[, options]);
+db.create(name, schema[, options]);
 ```
 
 Parameters
@@ -273,7 +273,7 @@ interface BoxOption {
 
 ```typescript
 // Sample box
-const User = db.box('user', {
+const User = db.create('user', {
   _id: {
     type: BoxDB.Types.NUMBER,
     key: true,
@@ -349,7 +349,7 @@ Box.find(null, predicate_1, predicate_2, predicate_3);
 > A `Box` is an abstraction that represents a [object store](https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore). and also can generate data in a defined form (schema).
 
 ```javascript
-const User = db.box('user', {
+const User = db.create('user', {
   _id: {
     type: BoxDB.Types.NUMBER,
     key: true,
