@@ -111,7 +111,7 @@ const Item = db.create('item', {
 const db = new BoxDB('database-name', 2); // 그냥 이렇게 하면됩니다!
 ```
 
-## Open database
+## 데이터베이스 열기
 
 ```typescript
 // 박스 정의
@@ -119,7 +119,7 @@ const db = new BoxDB('database-name', 2); // 그냥 이렇게 하면됩니다!
 
 await db.open();
 
-// 여기에서 Box를 사용할 수 있습니다! (데이터 접근 및 제어)
+// 여기부터 Box를 사용할 수 있습니다! (데이터 접근 및 제어)
 ```
 
 ## 데이터베이스 닫기

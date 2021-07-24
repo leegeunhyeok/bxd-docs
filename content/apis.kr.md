@@ -9,7 +9,7 @@ TocOpen: true
 
 ## BoxDB
 
-> IndexedDB 와 Object store 를 관리하기 위한 클래스입니다.
+> IndexedDB 와 객체 저장소를 관리하는 클래스입니다.
 
 ```javascript
 const db = new BoxDB(databaseName, version);
@@ -43,7 +43,7 @@ Methods
 
 ### BoxDB.Types
 
-> `BoxDB.Types` 은 데이터 타입의 집합입니다.
+> `BoxDB.Types` 은 데이터 타입의 집합입니다. 이는 BoxDB 에서 지원하는 타입을 나타내며, `any` 타입을 사용할 경우 타입 검즘을 건너뜁니다.
 
 ```javascript
 BoxDB.Types;
@@ -76,7 +76,7 @@ Properties
 
 ### BoxDB.Range
 
-> `BoxDB.Range` 는 [IDBKeyRange](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange)의 집합입니다.
+> `BoxDB.Range` 는 [IDBKeyRange](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange)의 집합이며, [BoxRange](#boxrange) 내의 값으로 사용됩니다.
 
 ```javascript
 // Properties
@@ -103,7 +103,7 @@ Methods
 
 ### BoxDB.Order
 
-> `BoxDB.Order` 는 [IDBCursor.direction](https://developer.mozilla.org/en-US/docs/Web/API/IDBCursor/direction)의 집합입니다.
+> `BoxDB.Order` 는 [IDBCursor.direction](https://developer.mozilla.org/en-US/docs/Web/API/IDBCursor/direction) 값들로 구성되어있으며, [BoxCursorHandler.get()](#boxcursorhandlerget) 에서 정렬할 때 사용합니다.
 
 ```javascript
 BoxDB.Order;
@@ -167,10 +167,10 @@ Return value
 
 > `BoxDB.transaction()` 메서드는 [TransactionTask](#transactiontask)로 이루어진 리스트를 받아, 하나의 트랜잭션 내에서 순차적으로 작업을 수행합니다.
 
-> 중요한 점은, 트랜잭션 작업 내에서 에러가 발생할 경우 이전 상태로 롤백됩니다. (원자성 보장)
+> 가장 중요한 점은, 트랜잭션 작업 내에서 에러가 발생할 경우 이전 상태로 롤백됩니다.
 
 ```javascript
-// ACID guaranteed
+// ACID 보장
 db.transaction(
   task_1,
   task_2,
@@ -221,7 +221,7 @@ type ConfiguredType = {
 ```
 
 ```javascript
-// Example
+// 예시
 const schema = {
   // 방법 1. 상세하게 필드 정의하기
   name: {
@@ -269,7 +269,7 @@ interface BoxOption {
 
 ## BoxData
 
-> [BoxSchema](#boxschema) 기반의 데이터
+> [BoxSchema](#boxschema) 기반의 값
 
 ```typescript
 // 샘플 box
@@ -307,7 +307,7 @@ type OptionalBoxData<S extends Schema> = Partial<BoxData<S>>;
 
 ## BoxRange
 
-> `BoxRange` 는 값 혹은 [IDBKeyRange](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange)로 조회할 때 사용되는 객체입니다.
+> `BoxRange` 는 값 혹은 [IDBKeyRange](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange)로 조회할 때 사용되는 객체입니다. `find()` 혹은 `$find()` 메서드에서 사용합니다.
 
 ```javascript
 // age = 10 (`age` 필드는 반드시 index 로 정의되어있어야 합니다)
@@ -346,7 +346,7 @@ Box.find(null, predicate_1, predicate_2, predicate_3);
 
 ## Box
 
-> `Box` 는 [객체 저장소](https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore)를 나타내는 추상화입니다. 그리고 정의된 형태(스키마)의 값을 생성할 수 있습니다.
+> `Box` 는 [객체 저장소](https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore)를 나타내는 추상화 인스턴스입니다. 해당 객체 저장소의 트랜잭션을 제어하거나, 정의된 형태(스키마)의 값을 생성할 수 있습니다.
 
 ```javascript
 const User = db.create('user', {
@@ -458,7 +458,7 @@ Parameters
   - 저장할 데이터
 - key: [IDBValidKey](https://microsoft.github.io/PowerBI-JavaScript/modules/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.html#idbvalidkey) (`선택`)
   - 레코드를 식별하기 위한 키 값 (default: `null`)
-  - `autoIncrement` 옵션과 함께 박스를 정의한 경우 사용
+  - `autoIncrement` 옵션과 함께 [Box](#box)를 정의한 경우 사용
 
 Return value
 
@@ -496,7 +496,7 @@ Parameters
   - 갱신하고자 하는 데이터
 - key: [IDBValidKey](https://microsoft.github.io/PowerBI-JavaScript/modules/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.html#idbvalidkey) (`선택`)
   - 갱신하고자 하는 레코드를 식별하는 키
-  - `autoIncrement` 옵션과 함께 박스를 정의한 경우 사용
+  - `autoIncrement` 옵션과 함께 [Box](#box)를 정의한 경우 사용
 
 Return value
 
@@ -521,7 +521,7 @@ Return value
 
 ## Box.find()
 
-> Box 인터페이스의 `find()` 메서드는 [BoxRange](#boxrange)와 제공된 [FilterFunction](#filterfunction)에 의해 필터링된 모든 레코드를 선택합니다.
+> Box 인터페이스의 `find()` 메서드는 [BoxRange](#boxrange)와 제공된 [FilterFunction](#filterfunction)에 의해 필터링된 모든 레코드를 선택합니다. 인자를 전달하지 않으면, 모든 레코드를 선택합니다.
 
 Parameters
 
@@ -573,7 +573,7 @@ Parameters
   - 저장할 데이터
 - key: [IDBValidKey](https://microsoft.github.io/PowerBI-JavaScript/modules/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.html#idbvalidkey) (`선택`)
   - 레코드를 식별하기 위한 키 값 (기본값: `null`)
-  - `autoIncrement` 옵션과 함께 박스를 정의한 경우 사용
+  - `autoIncrement` 옵션과 함께 [Box](#box)를 정의한 경우 사용
 
 Return value
 
@@ -593,7 +593,7 @@ Parameters
   - The data you wish to update.
 - key: [IDBValidKey](https://microsoft.github.io/PowerBI-JavaScript/modules/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.html#idbvalidkey) (`선택`)
   - 갱신하고자 하는 레코드를 식별하는 키 (기본값: `null`)
-  - `autoIncrement` 옵션과 함께 박스를 정의한 경우 사용
+  - `autoIncrement` 옵션과 함께 [Box](#box)를 정의한 경우 사용
 
 Return value
 
@@ -611,7 +611,7 @@ Parameters
 
 - key: [IDBValidKey](https://microsoft.github.io/PowerBI-JavaScript/modules/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.html#idbvalidkey) (`선택`)
   - 삭제하고자 하는 레코드를 식별하는 키
-  - `autoIncrement` 옵션과 함께 박스를 정의한 경우 사용
+  - `autoIncrement` 옵션과 함께 [Box](#box)를 정의한 경우 사용
 
 Return value
 
@@ -621,7 +621,7 @@ Return value
 
 > Box 인터페이스의 `find()` 메서드는 [BoxRange](#boxrange)와 제공된 [FilterFunction](#filterfunction)에 의해 필터링된 모든 레코드를 선택합니다.
 
-> `find()` 와 `$find()` 의 차이점은 [TransactionCursorHandler](#transactioncursorhandler)를 반환하는 점입니다.
+> `find()` 와 `$find()` 의 차이점은 [TransactionCursorHandler](#transactioncursorhandler)를 반환한다는 것입니다.
 
 ```javascript
 Box.$find(range, ...predicate);
@@ -745,4 +745,4 @@ Return value
 
 ## TransactionTask
 
-> `TransactionTask` 는 [transaction()](#transaction)에서 사용되는 객체입니다. 이는 [$get()](#$get), [$delete()](#$delete)와 같이 `$` 접두사가 붙은 메서드로 생성할 수 있습니다.
+> `TransactionTask` 는 [transaction()](#transaction)에서 사용되는 객체입니다. 이는 [$get()](#$get), [$delete()](#$delete)와 같이 `$` 접두사가 붙은 메서드를 통해 생성할 수 있습니다.
