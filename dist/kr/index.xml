@@ -13,7 +13,7 @@
       
       <guid>https://bxd.vercel.app/kr/apis/</guid>
       <description>모든 기능들은 IndexedDB 의 매커니즘을 따릅니다. (w3c, MDN)
- BoxDB  IndexedDB 와 Object store 를 관리하기 위한 클래스입니다.
+ BoxDB  IndexedDB 와 객체 저장소를 관리하는 클래스입니다.
  1  const db = new BoxDB(databaseName, version);   Parameters
  databaseName: string  데이터베이스 이름   version: number  열고자 하는 데이터베이스 버전    Properties
  BoxDB.Types static BoxDB.Range static BoxDB.Order static databaseName: string  데이터베이스 이름   version: number  데이터베이스 버전   ready: boolean  데이터베이스 준비 상태    Methods</description>
