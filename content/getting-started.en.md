@@ -219,10 +219,10 @@ await Item.find(
     value: BoxDB.Range.equal('1'),
   },
   (item) => !!item.memo,
-  (item) => parseInt(item.uid) % 2 === 1,
+  (item) => item.memo.includes('exp'),
 ).get();
 
-// [{ uid: '1', name: 'desktop' }]
+// [{ uid: '1', name: 'mac', memo: 'so expensive' }]
 ```
 
 ### Update multiple records by cursor

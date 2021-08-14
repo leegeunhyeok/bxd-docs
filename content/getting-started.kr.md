@@ -223,7 +223,7 @@ await Item.find(
   (item) => item.memo.includes('exp'),
 ).get();
 
-// [{ uid: '1', name: 'desktop' }]
+// [{ uid: '1', name: 'mac', memo: 'so expensive' }]
 ```
 
 ### 커서로 다중 레코드 갱신하기
