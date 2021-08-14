@@ -46,8 +46,8 @@ Box is the same concept like `Model` used by other ORMs.
 | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | 11                                                                                                                  | 12~                                                                                                                     | 10~                                                                                                                           | 23~                                                                                                                         | 10~                                                                                                                         | 10~                                                                                                                                 | 4~                                                                                                                            | 15~                                                                                                                       |
 
-- Test features in your browser [here](/bxd/demo.html).
-- Checkout `IE11` test [here](/bxd/ie).
+- Test features in your browser [here](/demo.html).
+- Checkout `IE11` test [here](/ie).
 
 # Installation
 
@@ -144,11 +144,11 @@ await User.add({ _id: '1', name: 'leegeunhyeok', age: 20 });
 
 ```typescript
 const items = [
-  { uid: '0', name: 'unknown 1' },
-  { uid: '0', name: 'unknown 2' },
+  { uid: '0', name: 'unknown 1', memo: '' },
+  { uid: '0', name: 'unknown 2', memo: '' },
   { uid: '1', name: 'mac', memo: 'so expensive' },
-  { uid: '1', name: 'phone' },
-  { uid: '1', name: 'desktop' },
+  { uid: '1', name: 'phone', memo: '' },
+  { uid: '1', name: 'desktop', memo: '' },
 ];
 
 // In async function
@@ -182,9 +182,11 @@ await User.delete('0'); // Delete `user._id = '0'`
 await Item.find().get();
 
 // [
+//   { uid: '0', name: 'unknown 1', memo: '' },
+//   { uid: '0', name: 'unknown 2', memo: '' },
 //   { uid: '1', name: 'mac', memo: 'so expensive' },
-//   { uid: '2', name: 'phone' },
-//   { uid: '3', name: 'desktop' }
+//   { uid: '1', name: 'phone', memo: '' },
+//   { uid: '1', name: 'desktop', memo: '' }
 // ]
 ```
 
@@ -193,7 +195,7 @@ await Item.find().get();
 ```typescript
 await Item.find({ index: 'name', value: 'phone' }).get();
 
-// [{ uid: '2', name: 'phone' }]
+// [{ uid: '1', name: 'phone', memo: '' }]
 ```
 
 ### Get records by cursor (using filter functions)
@@ -214,13 +216,13 @@ await Item.find(
 await Item.find(
   {
     index: 'uid',
-    value: BoxDB.Range.lower('5'),
+    value: BoxDB.Range.equal('1'),
   },
   (item) => !!item.memo,
   (item) => parseInt(item.uid) % 2 === 1,
 ).get();
 
-// [{ uid: '3', name: 'desktop' }]
+// [{ uid: '1', name: 'desktop' }]
 ```
 
 ### Update multiple records by cursor
@@ -257,8 +259,9 @@ await db.transaction(
 
 // Add new user: { _id: '3', name: 'Aiden', age: 16 }
 // Add new item: { uid: '3', name: 'pencil', memo: 'super sharp' }
-// Add new item: { uid: '3', name: 'eraser' }
-// Add new item: { uid: '3', name: 'juice' }
+// Add new item: { uid: '3', name: 'book', memo: '200 pages' }
+// Add new item: { uid: '3', name: 'eraser', memo: '' }
+// Add new item: { uid: '3', name: 'juice', memo: '' }
 ```
 
 ### Get records count

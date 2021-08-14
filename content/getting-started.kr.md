@@ -23,7 +23,7 @@ BoxDB는 [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_
 
 이것이 BoxDB의 시작점이자, 핵심 개념입니다.
 
-Box는 BoxDB의 핵심입니다. Box는 IndexedDB 내의 객체 저장소를 나타대는 추상화입니다.
+Box는 BoxDB의 핵심입니다. Box는 IndexedDB 내의 객체 저장소를 나타대는 추상화된 객체입니다.
 
 Box는 다른 ORM에서 사용되는 `모델`과 동일한 개념입니다.
 
@@ -62,7 +62,7 @@ npm install bxd
 
 ## 데이터베이스 준비
 
-만약 데이터베이스가 존재하지 않다면, 새로 생성합니다.
+만약 데이터베이스가 존재하지 않다면, 새로운 데이터베이스를 생성합니다.
 
 ```typescript
 import BoxDB from 'bxd';
@@ -97,18 +97,20 @@ const Item = db.create('item', {
     index: true,
   },
   memo: BoxDB.Types.STRING,
+}, {
+  autoIncrement: true,
 });
 ```
 
 ## 데이터베이스 버전 업데이트
 
-만약 데이터베이스 버전을 변경하고 싶다면(예: Box 스키마 변경, 새로운 Box 추가 등), 그냥 이전 버전보다 큰 숫자로 변경하면 됩니다.
+만약 데이터베이스 버전을 변경하고 싶다면(예: Box 스키마 변경, 새로운 Box 추가 등), 이전 버전보다 큰 숫자로 변경하면 됩니다.
 
 ```typescript
 // 이전 버전
 // const db = new BoxDB('database-name', 1);
 
-const db = new BoxDB('database-name', 2); // 그냥 이렇게 하면됩니다!
+const db = new BoxDB('database-name', 2); // 버전 업데이트
 ```
 
 ## 데이터베이스 열기
@@ -143,11 +145,11 @@ await User.add({ _id: '1', name: 'leegeunhyeok', age: 20 });
 
 ```typescript
 const items = [
-  { uid: '0', name: 'unknown 1' },
-  { uid: '0', name: 'unknown 2' },
+  { uid: '0', name: 'unknown 1', memo: '' },
+  { uid: '0', name: 'unknown 2', memo: '' },
   { uid: '1', name: 'mac', memo: 'so expensive' },
-  { uid: '1', name: 'phone' },
-  { uid: '1', name: 'desktop' },
+  { uid: '1', name: 'phone', memo: '' },
+  { uid: '1', name: 'desktop', memo: '' },
 ];
 
 // 비동기 함수 내에서
@@ -181,9 +183,11 @@ await User.delete('0'); // `user._id = '0'` 레코드 삭제
 await Item.find().get();
 
 // [
+//   { uid: '0', name: 'unknown 1', memo: '' },
+//   { uid: '0', name: 'unknown 2', memo: '' },
 //   { uid: '1', name: 'mac', memo: 'so expensive' },
-//   { uid: '2', name: 'phone' },
-//   { uid: '3', name: 'desktop' }
+//   { uid: '1', name: 'phone', memo: '' },
+//   { uid: '1', name: 'desktop', memo: '' }
 // ]
 ```
 
@@ -192,7 +196,7 @@ await Item.find().get();
 ```typescript
 await Item.find({ index: 'name', value: 'phone' }).get();
 
-// [{ uid: '2', name: 'phone' }]
+// [{ uid: '1', name: 'phone', memo: '' }]
 ```
 
 ### 커서로 레코드 가져오기 (필터 함수 사용)
@@ -213,13 +217,13 @@ await Item.find(
 await Item.find(
   {
     index: 'uid',
-    value: BoxDB.Range.lower('5'),
+    value: BoxDB.Range.equal('1'),
   },
   (item) => !!item.memo,
-  (item) => parseInt(item.uid) % 2 === 1,
+  (item) => item.memo.includes('exp'),
 ).get();
 
-// [{ uid: '3', name: 'desktop' }]
+// [{ uid: '1', name: 'desktop' }]
 ```
 
 ### 커서로 다중 레코드 갱신하기
@@ -249,21 +253,22 @@ await Item.find(null, (item) => item.uid === '0').delete();
 await db.transaction(
   User.$add({ _id: '3', name: 'Aiden', age: 16 }),
   Item.$add({ uid: '3', name: 'pencil', memo: 'super sharp' }),
-  Item.$add({ uid: '3', name: 'eraser' }),
-  Item.$add({ uid: '3', name: 'book', memo: '200p' }),
-  Item.$add({ uid: '3', name: 'juice' }),
+  Item.$add({ uid: '3', name: 'eraser', memo: '' }),
+  Item.$add({ uid: '3', name: 'book', memo: '200 pages' }),
+  Item.$add({ uid: '3', name: 'juice', memo: '' }),
 );
 
 // 새로운 user 추가: { _id: '3', name: 'Aiden', age: 16 }
 // 새로운 item 추가: { uid: '3', name: 'pencil', memo: 'super sharp' }
-// 새로운 item 추가: { uid: '3', name: 'eraser' }
-// 새로운 item 추가: { uid: '3', name: 'juice' }
+// 새로운 item 추가: { uid: '3', name: 'eraser', memo: '' }
+// 새로운 item 추가: { uid: '3', name: 'book', memo: '200 pages' }
+// 새로운 item 추가: { uid: '3', name: 'juice', memo: '' }
 ```
 
 ### 레코드 수 가져오기
 
 ```typescript
-await Item.count(); // n
+await Item.count(); // 7
 ```
 
 ### 모든 레코드 지우기

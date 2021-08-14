@@ -40,7 +40,7 @@
 이러한 이유로, BoxDB 프로젝트가 시작되었습니다.
 그런데 왜 이름이 BoxDB 인가요?
  박스는 가볍습니다. 박스에는 모양이 있습니다. 박스에는 무언가를 담을 수 있습니다. 박스는 쉽게 가져갈 수 있습니다.  이것이 BoxDB의 시작점이자, 핵심 개념입니다.
-Box는 BoxDB의 핵심입니다. Box는 IndexedDB 내의 객체 저장소를 나타대는 추상화입니다.</description>
+Box는 BoxDB의 핵심입니다. Box는 IndexedDB 내의 객체 저장소를 나타대는 추상화된 객체입니다.</description>
     </item>
     
     <item>
